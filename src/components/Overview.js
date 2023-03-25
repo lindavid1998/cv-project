@@ -44,7 +44,6 @@ class Overview extends Component {
 
 	render() {
 		const { info, showForm } = this.state;
-		const fields = Object.keys(info);
 		const { name, title, phone, email } = info;
     
 		return (
@@ -69,7 +68,7 @@ class Overview extends Component {
 
 				{showForm && (
 					<Form
-						fields={fields}
+						info={info}
 						submitHandler={this.submitHandler}
 						toggleForm={this.toggleForm}
 					/>

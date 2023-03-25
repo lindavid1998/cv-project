@@ -5,17 +5,17 @@ import './Form.css';
 class Form extends Component {
 
 	render() {
-		const { fields, submitHandler, toggleForm } = this.props;
+		const { info, submitHandler, toggleForm } = this.props;
 
 		return (
 			<form onSubmit={submitHandler}>
-				{fields.map((field, i) => {
+				{Object.keys(info).map((field, i) => {
 					return (
 						<div className="form-row" key={i}>
 							<label htmlFor={field}>
 								{field.charAt(0).toUpperCase() + field.slice(1)}
 							</label>
-							<input type="text" id={field} name={field}></input>
+							<input type="text" id={field} name={field} defaultValue={info[field]}></input>
 						</div>
 					);
 				})}
