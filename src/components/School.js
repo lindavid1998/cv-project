@@ -1,0 +1,21 @@
+import React, { Component } from 'react';
+import Button from './Button';
+import '../styles/School.css';
+
+class School extends Component {
+	render() {
+		const { name, degree, start, end, description } = this.props;
+		return (
+			<div className="school">
+				<h2 className="school-name">{name}</h2>
+				<p className="degree">{degree}</p>
+				<p className="duration">
+					{start} - {end}
+				</p>
+				<p className="description">{description}</p>
+			</div>
+		);
+	}
+}
+
+export default School;

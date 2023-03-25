@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Overview.css';
+import '../styles/Overview.css';
 import Button from './Button';
 import Form from './Form';
 import avatar from './avatar.svg';
@@ -68,7 +68,7 @@ class Overview extends Component {
 
 				{showForm && (
 					<Form
-						info={info}
+						fields={info}
 						submitHandler={this.submitHandler}
 						toggleForm={this.toggleForm}
 					/>

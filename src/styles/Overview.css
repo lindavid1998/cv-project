@@ -1,18 +1,18 @@
 .Overview {
     display: grid;
-    grid-template-columns: 100px 2fr 1fr;
+    grid-template-columns: 110px 2fr 1fr;
     grid-template-rows: repeat(3, 25px);
     gap: 5px;
     align-items: center;
 }
 
 .avatar {
-    height: 70px;
-    width: 70px;
+    height: 90px;
+    width: 90px;
     border-radius: 50%;
     grid-area: 1 / 1 / -1 / 2;
     align-self: center;
-    justify-self: center;
+    /* justify-self: center; */
 }
 
 .avatar img {
@@ -36,8 +36,7 @@
     flex-direction: row;
     gap: 8px;
     align-items: center;
-    font-size: 0.9rem;
-     white-space: nowrap;
+    white-space: nowrap;
 }
 
 .edit {

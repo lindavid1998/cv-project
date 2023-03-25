@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import Button from './Button';
-import './Form.css';
+import '../styles/Form.css';
 
 class Form extends Component {
 
 	render() {
-		const { info, submitHandler, toggleForm } = this.props;
+		const { fields, submitHandler, toggleForm } = this.props;
 
 		return (
 			<form onSubmit={submitHandler}>
-				{Object.keys(info).map((field, i) => {
+				{Object.keys(fields).map((key, i) => {
 					return (
 						<div className="form-row" key={i}>
-							<label htmlFor={field}>
-								{field.charAt(0).toUpperCase() + field.slice(1)}
+							<label htmlFor={key}>
+								{key.charAt(0).toUpperCase() + key.slice(1)}
 							</label>
-							<input type="text" id={field} name={field} defaultValue={info[field]}></input>
+							<input type="text" id={key} name={key} defaultValue={fields[key]}></input>
 						</div>
 					);
 				})}
