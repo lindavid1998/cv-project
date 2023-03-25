@@ -1,70 +1,78 @@
 import React, { Component } from 'react';
+import './Overview.css';
+import Button from './Button';
+import Form from './Form';
+import avatar from './avatar.svg';
 
 class Overview extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			name: 'Your Name',
-			title: 'Your Title',
-			phone: 'XXX-XXX-XXXX',
-			email: 'youremail@email.com',
+			info: {
+				name: 'Your name',
+				title: 'Your title',
+				phone: 'xxx-xxx-xxxx',
+				email: 'xxx@email.com',
+			},
 			showForm: false,
 		};
-		this.editHandler = this.editHandler.bind(this);
+		this.toggleForm = this.toggleForm.bind(this);
 		this.submitHandler = this.submitHandler.bind(this);
 	}
 
-	editHandler() {
+	toggleForm() {
 		this.setState({
-			name: this.state.name,
-			title: this.state.title,
-			phone: this.state.phone,
-			email: this.state.email,
+			info: this.state.info,
 			showForm: !this.state.showForm,
 		});
 	}
 
 	submitHandler(e) {
-        e.preventDefault();
-        const formData = new FormData(e.target)
+		e.preventDefault();
+		const formData = new FormData(e.target);
 
 		this.setState({
-			name: formData.get('name'),
-			title: formData.get('title'),
-			phone: formData.get('phone'),
-			email: formData.get('email'),
+			info: {
+				name: formData.get('name'),
+				title: formData.get('title'),
+				phone: formData.get('phone'),
+				email: formData.get('email'),
+			},
 			showForm: false,
 		});
 	}
 
 	render() {
-		const { name, title, phone, email, showForm } = this.state;
+		const { info, showForm } = this.state;
+		const fields = Object.keys(info);
+		const { name, title, phone, email } = info;
+    
 		return (
-			<div>
-				<img src="./avatar.png" alt="Avatar" />
-				<h1>{name}</h1>
-				<h2>{title}</h2>
-				<ul>
+			<div className="Overview">
+				<div className="avatar">
+					<img src={avatar} alt="Avatar" />
+				</div>
+				<h1 className="name">{name}</h1>
+				<h2 className="title">{title}</h2>
+				<ul className="contact">
 					<li>{phone}</li>
+					<li>|</li>
 					<li>{email}</li>
 				</ul>
-				<button onClick={this.editHandler}>Edit</button>
+
+				<Button
+					text="Edit"
+					onClick={this.toggleForm}
+					className="edit"
+					id="overview"
+				/>
+
 				{showForm && (
-					<form action="" onSubmit={this.submitHandler}>
-						<label htmlFor="name">Name:</label>
-                        <input type="text" id="name" name="name" />
-                        
-						<label htmlFor="title">Title:</label>
-                        <input type="text" id="title" name="title" />
-                        
-						<label htmlFor="phone">Phone:</label>
-                        <input type="text" id="phone" name="phone" />
-                        
-						<label htmlFor="email">Email:</label>
-                        <input type="text" id="email" name="email" />
-                        
-						<input type="submit"></input>
-					</form>
+					<Form
+						fields={fields}
+						submitHandler={this.submitHandler}
+						toggleForm={this.toggleForm}
+					/>
 				)}
 			</div>
 		);
