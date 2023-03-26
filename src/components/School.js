@@ -13,6 +13,10 @@ class School extends Component {
 					{start} - {end}
 				</p>
 				<p className="description">{description}</p>
+				<div className="buttons">
+					<Button text="Edit" className="edit school" />
+					<Button text="Delete" className="delete school" />
+				</div>
 			</div>
 		);
 	}
