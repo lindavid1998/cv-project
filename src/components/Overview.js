@@ -17,7 +17,7 @@ class Overview extends Component {
 			showForm: false,
 		};
 		this.toggleForm = this.toggleForm.bind(this);
-		this.submitHandler = this.submitHandler.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
 	toggleForm() {
@@ -27,7 +27,7 @@ class Overview extends Component {
 		});
 	}
 
-	submitHandler(e) {
+	handleSubmit(e) {
 		e.preventDefault();
 		const formData = new FormData(e.target);
 
@@ -45,7 +45,7 @@ class Overview extends Component {
 	render() {
 		const { info, showForm } = this.state;
 		const { name, title, phone, email } = info;
-    
+
 		return (
 			<div className="Overview">
 				<div className="avatar">
@@ -69,7 +69,7 @@ class Overview extends Component {
 				{showForm && (
 					<Form
 						fields={info}
-						submitHandler={this.submitHandler}
+						handleSubmit={this.handleSubmit}
 						toggleForm={this.toggleForm}
 					/>
 				)}

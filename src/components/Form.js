@@ -3,19 +3,23 @@ import Button from './Button';
 import '../styles/Form.css';
 
 class Form extends Component {
-
 	render() {
-		const { fields, submitHandler, toggleForm } = this.props;
+		const { fields, handleSubmit, toggleForm } = this.props;
 
 		return (
-			<form onSubmit={submitHandler}>
+			<form onSubmit={handleSubmit}>
 				{Object.keys(fields).map((key, i) => {
 					return (
 						<div className="form-row" key={i}>
 							<label htmlFor={key}>
 								{key.charAt(0).toUpperCase() + key.slice(1)}
 							</label>
-							<input type="text" id={key} name={key} defaultValue={fields[key]}></input>
+							<input
+								type="text"
+								id={key}
+								name={key}
+								defaultValue={fields[key]}
+							></input>
 						</div>
 					);
 				})}

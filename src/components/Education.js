@@ -10,9 +10,11 @@ class Education extends Component {
 		this.state = {
 			schools: [],
 			showForm: false,
+			count: 0,
 		};
 		this.toggleForm = this.toggleForm.bind(this);
-		this.submitHandler = this.submitHandler.bind(this);
+		this.handleAdd = this.handleAdd.bind(this);
+		this.handleRemove = this.handleRemove.bind(this);
 	}
 
 	toggleForm() {
@@ -22,7 +24,7 @@ class Education extends Component {
 		});
 	}
 
-	submitHandler(e) {
+	handleAdd(e) {
 		e.preventDefault();
 		const formData = new FormData(e.target);
 
@@ -32,11 +34,22 @@ class Education extends Component {
 			start: formData.get('start'),
 			end: formData.get('end'),
 			description: formData.get('description'),
+			id: this.state.count,
 		};
 
 		this.setState({
 			schools: this.state.schools.concat(newSchool),
 			showForm: false,
+			count: this.state.count + 1,
+		});
+	}
+
+	handleRemove(e) {
+		const id = e.target.parentNode.parentNode.id;
+
+		this.setState({
+			schools: this.state.schools.filter((school) => school.id != id),
+			showForm: this.state.showForm,
 		});
 	}
 
@@ -58,6 +71,8 @@ class Education extends Component {
 							start={school.start}
 							end={school.end}
 							description={school.description}
+							handleRemove={this.handleRemove}
+							id={school.id}
 							key={i}
 						/>
 					);
@@ -72,7 +87,7 @@ class Education extends Component {
 							end: '',
 							description: '',
 						}}
-						submitHandler={this.submitHandler}
+						handleSubmit={this.handleAdd}
 						toggleForm={this.toggleForm}
 					/>
 				)}
