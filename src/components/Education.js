@@ -75,12 +75,11 @@ class Education extends Component {
 			start: formData.get('start'),
 			end: formData.get('end'),
 			description: formData.get('description'),
-			id: this.state.editId,
 		};
 
 		let schools = this.state.schools;
 		let i = schools.findIndex((school) => school.id == this.state.editId);
-		schools[i] = newSchool;
+		schools[i] = Object.assign({}, schools[i], newSchool);
 
 		this.setState({
 			schools: schools,
@@ -93,7 +92,7 @@ class Education extends Component {
 		const { schools, showForm, editMode, editId } = this.state;
 
 		return (
-			<div className="education">
+			<div className="Education">
 				<div className="header">
 					<h1>Education</h1>
 					<Button text="Add" onClick={this.toggleForm} className="add" />

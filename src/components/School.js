@@ -15,7 +15,7 @@ class School extends Component {
 			id,
 		} = this.props;
 		return (
-			<div className="school" id={id}>
+			<div className="School" id={id}>
 				<h2 className="school-name">{name}</h2>
 				<p className="degree">{degree}</p>
 				<p className="duration">
