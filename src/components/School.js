@@ -4,7 +4,16 @@ import '../styles/School.css';
 
 class School extends Component {
 	render() {
-		const { name, degree, start, end, description, handleRemove, id } = this.props;
+		const {
+			name,
+			degree,
+			start,
+			end,
+			description,
+			handleRemove,
+			toggleEdit,
+			id,
+		} = this.props;
 		return (
 			<div className="school" id={id}>
 				<h2 className="school-name">{name}</h2>
@@ -14,7 +23,7 @@ class School extends Component {
 				</p>
 				<p className="description">{description}</p>
 				<div className="buttons">
-					<Button text="Edit" className="edit school" />
+					<Button text="Edit" className="edit school" onClick={toggleEdit} />
 					<Button
 						text="Delete"
 						className="delete school"

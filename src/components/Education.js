@@ -9,25 +9,29 @@ class Education extends Component {
 		super(props);
 		this.state = {
 			schools: [],
-			showForm: false,
 			count: 0,
+			showForm: false,
+			editMode: false,
+			editId: null,
 		};
 		this.toggleForm = this.toggleForm.bind(this);
+		this.toggleEdit = this.toggleEdit.bind(this);
 		this.handleAdd = this.handleAdd.bind(this);
 		this.handleRemove = this.handleRemove.bind(this);
+		this.handleEdit = this.handleEdit.bind(this);
 	}
 
 	toggleForm() {
 		this.setState({
-			schools: this.state.schools,
 			showForm: !this.state.showForm,
+			editMode: false,
 		});
 	}
 
 	handleAdd(e) {
 		e.preventDefault();
-		const formData = new FormData(e.target);
 
+		const formData = new FormData(e.target);
 		const newSchool = {
 			name: formData.get('name'),
 			degree: formData.get('degree'),
@@ -39,8 +43,9 @@ class Education extends Component {
 
 		this.setState({
 			schools: this.state.schools.concat(newSchool),
-			showForm: false,
 			count: this.state.count + 1,
+			showForm: false,
+			editMode: false,
 		});
 	}
 
@@ -49,12 +54,43 @@ class Education extends Component {
 
 		this.setState({
 			schools: this.state.schools.filter((school) => school.id != id),
-			showForm: this.state.showForm,
+		});
+	}
+
+	toggleEdit(e) {
+		this.setState({
+			editMode: true,
+			editId: e.target.parentNode.parentNode.id,
+			showForm: true,
+		});
+	}
+
+	handleEdit(e) {
+		e.preventDefault();
+
+		const formData = new FormData(e.target);
+		const newSchool = {
+			name: formData.get('name'),
+			degree: formData.get('degree'),
+			start: formData.get('start'),
+			end: formData.get('end'),
+			description: formData.get('description'),
+			id: this.state.editId,
+		};
+
+		let schools = this.state.schools
+		let i = schools.findIndex(school => school.id == this.state.editId)
+		schools[i] = newSchool
+
+		this.setState({
+			schools: schools,
+			showForm: false,
+			editMode: false,
 		});
 	}
 
 	render() {
-		const { schools, showForm } = this.state;
+		const { schools, showForm, editMode } = this.state;
 
 		return (
 			<div className="education">
@@ -72,6 +108,7 @@ class Education extends Component {
 							end={school.end}
 							description={school.description}
 							handleRemove={this.handleRemove}
+							toggleEdit={this.toggleEdit}
 							id={school.id}
 							key={i}
 						/>
@@ -87,7 +124,7 @@ class Education extends Component {
 							end: '',
 							description: '',
 						}}
-						handleSubmit={this.handleAdd}
+						handleSubmit={editMode ? this.handleEdit : this.handleAdd}
 						toggleForm={this.toggleForm}
 					/>
 				)}
