@@ -1,4 +1,4 @@
-.Education, .Work {
+.Education, .Work, .Skills {
     display: flex;
     flex-direction: column;
     gap: 30px;
