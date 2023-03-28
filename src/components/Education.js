@@ -78,9 +78,9 @@ class Education extends Component {
 			id: this.state.editId,
 		};
 
-		let schools = this.state.schools
-		let i = schools.findIndex(school => school.id == this.state.editId)
-		schools[i] = newSchool
+		let schools = this.state.schools;
+		let i = schools.findIndex((school) => school.id == this.state.editId);
+		schools[i] = newSchool;
 
 		this.setState({
 			schools: schools,
@@ -90,7 +90,7 @@ class Education extends Component {
 	}
 
 	render() {
-		const { schools, showForm, editMode } = this.state;
+		const { schools, showForm, editMode, editId } = this.state;
 
 		return (
 			<div className="education">
@@ -117,13 +117,23 @@ class Education extends Component {
 
 				{showForm && (
 					<Form
-						fields={{
-							name: '',
-							degree: '',
-							start: '',
-							end: '',
-							description: '',
-						}}
+						fields={
+							editMode
+								? {
+										name: schools[editId].name,
+										degree: schools[editId].degree,
+										start: schools[editId].start,
+										end: schools[editId].end,
+										description: schools[editId].description,
+								  }
+								: {
+										name: '',
+										degree: '',
+										start: '',
+										end: '',
+										description: '',
+								  }
+						}
 						handleSubmit={editMode ? this.handleEdit : this.handleAdd}
 						toggleForm={this.toggleForm}
 					/>
