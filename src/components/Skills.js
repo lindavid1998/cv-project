@@ -10,6 +10,7 @@ class Skills extends Component {
 			showForm: false,
 		};
 		this.toggleForm = this.toggleForm.bind(this);
+		this.handleAdd = this.handleAdd.bind(this);
 	}
 
 	toggleForm() {
@@ -18,14 +19,32 @@ class Skills extends Component {
 		});
 	}
 
-    render() {
-        const { showForm } = this.state
+	handleAdd(e) {
+		e.preventDefault();
+
+		const formData = new FormData(e.target);
+		const newSkill = formData.get('skill');
+
+		this.setState({
+			skills: this.state.skills.concat(newSkill),
+			showForm: false,
+		});
+	}
+
+	render() {
+		const { showForm, skills } = this.state;
 		return (
 			<div className="Skills">
 				<div className="header">
 					<h1>Skills</h1>
 					<Button text="Add" onClick={this.toggleForm} className="add" />
-                </div>
+				</div>
+
+				<ul className="skills-list">
+					{skills.map((skill, i) => {
+						return <li key={i}>{skill}</li>;
+					})}
+				</ul>
 
 				{showForm && (
 					<Form
