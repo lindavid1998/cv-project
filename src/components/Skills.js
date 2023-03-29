@@ -9,9 +9,11 @@ class Skills extends Component {
 		this.state = {
 			skills: [],
 			showForm: false,
+			count: 0,
 		};
 		this.toggleForm = this.toggleForm.bind(this);
 		this.handleAdd = this.handleAdd.bind(this);
+		this.handleRemove = this.handleRemove.bind(this);
 	}
 
 	toggleForm() {
@@ -24,11 +26,26 @@ class Skills extends Component {
 		e.preventDefault();
 
 		const formData = new FormData(e.target);
-		const newSkill = formData.get('skill');
+		// const newSkill = formData.get('skill');
+
+		const newSkill = {
+			name: formData.get('skill'),
+			id: this.state.count,
+		};
 
 		this.setState({
 			skills: this.state.skills.concat(newSkill),
 			showForm: false,
+			count: this.state.count + 1,
+		});
+	}
+
+	handleRemove(e) {
+		const id = e.target.parentNode.parentNode.id;
+		console.log(id);
+
+		this.setState({
+			skills: this.state.skills.filter((skill) => skill.id != id),
 		});
 	}
 
@@ -42,12 +59,15 @@ class Skills extends Component {
 				</div>
 
 				<ul className="skills-list">
-					{skills.map((skill, i) => {
+					{skills.map((skill) => {
 						return (
-							<li className="skill" key={i}>
+							<li className="skill" key={skill.id} id={skill.id}>
 								<div>
-									<p>{skill}</p>
-									<i class="fa-solid fa-minus"></i>
+									<p>{skill.name}</p>
+									<i
+										className="fa-solid fa-minus"
+										onClick={this.handleRemove}
+									/>
 								</div>
 							</li>
 						);
