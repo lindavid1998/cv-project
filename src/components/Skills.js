@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Button from './Button';
 import Form from './Form';
-import '../styles/Skills.css'
+import '../styles/Skills.css';
 
 class Skills extends Component {
 	constructor(props) {
@@ -43,7 +43,14 @@ class Skills extends Component {
 
 				<ul className="skills-list">
 					{skills.map((skill, i) => {
-						return <li key={i}>{skill}</li>;
+						return (
+							<li className="skill" key={i}>
+								<div>
+									<p>{skill}</p>
+									<i class="fa-solid fa-minus"></i>
+								</div>
+							</li>
+						);
 					})}
 				</ul>
 
