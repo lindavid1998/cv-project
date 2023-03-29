@@ -53,11 +53,11 @@ class Overview extends Component {
 				</div>
 				<h1 className="name">{name}</h1>
 				<h2 className="title">{title}</h2>
-				<ul className="contact">
-					<li>{phone}</li>
-					<li>|</li>
-					<li>{email}</li>
-				</ul>
+				<div className="contact-info">
+					<div>{phone}</div>
+					<div>|</div>
+					<div>{email}</div>
+				</div>
 
 				<Button
 					text="Edit"

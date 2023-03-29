@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Button from './Button';
 import Form from './Form';
+import '../styles/Skills.css'
 
 class Skills extends Component {
 	constructor(props) {

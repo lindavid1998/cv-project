@@ -1,0 +1,8 @@
+.skills-list {
+    list-style: disc inside;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(250px, 1fr));
+    gap: 12px;
+    width: 85%;
+    margin: 0 auto;
+}
