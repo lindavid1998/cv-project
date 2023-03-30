@@ -39,8 +39,7 @@ class Skills extends Component {
 	}
 
 	handleRemove(e) {
-		const id = e.target.parentNode.parentNode.id;
-		console.log(id);
+		const id = e.currentTarget.parentNode.parentNode.id;
 
 		this.setState({
 			skills: this.state.skills.filter((skill) => skill.id != id),

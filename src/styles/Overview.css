@@ -1,48 +1,70 @@
 .Overview {
-    display: grid;
-    grid-template-columns: 110px 2fr 1fr;
-    grid-template-rows: repeat(3, 25px);
-    gap: 5px;
-    align-items: center;
+	display: grid;
+	grid-template-columns: 110px 2fr 1fr;
+	grid-template-rows: repeat(3, 25px);
+	gap: 5px;
+	align-items: center;
 }
 
 .avatar {
-    height: 90px;
-    width: 90px;
-    border-radius: 50%;
-    grid-area: 1 / 1 / -1 / 2;
-    align-self: center;
+	height: 90px;
+	width: 90px;
+	border-radius: 50%;
+	grid-area: 1 / 1 / -1 / 2;
+	align-self: center;
+	position: relative;
 }
 
 .avatar img {
-    border-radius: 50%;
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
+	border-radius: 50%;
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+	transition: filter 0.3s ease-in-out;
 }
 
 .name {
-    grid-area: 1 / 2 / 2 / 3;
+	grid-area: 1 / 2 / 2 / 3;
 }
 
 .title {
-    grid-area: 2 / 2 / 3 / 3;
+	grid-area: 2 / 2 / 3 / 3;
 }
 
 .contact-info {
-    grid-area: 3 / 2 / 4 / 3;
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-    align-items: center;
-    white-space: nowrap;
+	grid-area: 3 / 2 / 4 / 3;
+	display: flex;
+	flex-direction: row;
+	gap: 8px;
+	align-items: center;
+	white-space: nowrap;
 }
 
 .edit {
-    grid-area: 1 / 3 / 2 / -1;
-    justify-self: end;
+	grid-area: 1 / 3 / 2 / -1;
+	justify-self: end;
 }
 
 .Overview:hover button.edit {
 	visibility: visible;
+}
+
+.avatar:hover img {
+	filter: brightness(30%);
+}
+
+.avatar::before {
+	content: 'Edit';
+	position: absolute;
+	bottom: 5%;
+	left: 50%;
+	z-index: 999;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+    font-weight: 700;
+    transform: translate(-50%, -50%);
+}
+
+.avatar:hover::before {
+	opacity: 1;
 }

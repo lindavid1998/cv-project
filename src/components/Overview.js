@@ -49,7 +49,7 @@ class Overview extends Component {
 		return (
 			<div className="Overview">
 				<div className="avatar">
-					<img src={avatar} alt="Avatar" />
+					<img src={avatar} alt="Avatar"></img>
 				</div>
 				<h1 className="name">{name}</h1>
 				<h2 className="title">{title}</h2>
