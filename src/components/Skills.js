@@ -26,8 +26,6 @@ class Skills extends Component {
 		e.preventDefault();
 
 		const formData = new FormData(e.target);
-		// const newSkill = formData.get('skill');
-
 		const newSkill = {
 			name: formData.get('skill'),
 			id: this.state.count,
@@ -64,10 +62,7 @@ class Skills extends Component {
 							<li className="skill" key={skill.id} id={skill.id}>
 								<div>
 									<p>{skill.name}</p>
-									<i
-										className="fa-solid fa-minus"
-										onClick={this.handleRemove}
-									/>
+									<Button onClick={this.handleRemove} className="delete" text="Delete" />
 								</div>
 							</li>
 						);

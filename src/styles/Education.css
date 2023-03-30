@@ -1,11 +1,19 @@
-.Education, .Work, .Skills {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
+.Education,
+.Work,
+.Skills {
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
 }
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.Education:hover button.add,
+.Work:hover button.add,
+.Skills:hover button.add {
+	visibility: visible;
 }

@@ -1,19 +1,24 @@
-.School, .Job {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-
-    position: relative;
+.School,
+.Job {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	position: relative;
 }
 
 .description {
-    margin-top: 20px;
+	margin-top: 20px;
 }
 
 .buttons {
-    display: flex;
-    gap: 10px;
-    position: absolute;
-    top: 0;
-    right: 0;
+	display: flex;
+	gap: 10px;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.School:hover button,
+.Job:hover button {
+	visibility: visible;
 }

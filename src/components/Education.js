@@ -50,7 +50,7 @@ class Education extends Component {
 	}
 
 	handleRemove(e) {
-		const id = e.target.parentNode.parentNode.id;
+		const id = e.currentTarget.parentNode.parentNode.id;
 
 		this.setState({
 			schools: this.state.schools.filter((school) => school.id != id),
@@ -60,7 +60,7 @@ class Education extends Component {
 	toggleEdit(e) {
 		this.setState({
 			editMode: true,
-			editId: e.target.parentNode.parentNode.id,
+			editId: e.currentTarget.parentNode.parentNode.id,
 			showForm: true,
 		});
 	}
