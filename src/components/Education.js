@@ -10,25 +10,41 @@ class Education extends Component {
 		this.state = {
 			schools: [],
 			count: 0,
-			showForm: false,
-			editMode: false,
+			addSchool: false,
+			editSchool: false,
 			editId: null,
 		};
-		this.toggleForm = this.toggleForm.bind(this);
-		this.toggleEdit = this.toggleEdit.bind(this);
-		this.handleAdd = this.handleAdd.bind(this);
-		this.handleRemove = this.handleRemove.bind(this);
-		this.handleEdit = this.handleEdit.bind(this);
+
+		this.handleClickToggleForm = this.handleClickToggleForm.bind(this);
+		this.handleClickRemoveSchool = this.handleClickRemoveSchool.bind(this);
+		this.handleSubmitAdd = this.handleSubmitAdd.bind(this);
+		this.handleSubmitEdit = this.handleSubmitEdit.bind(this);
 	}
 
-	toggleForm() {
+	handleClickToggleForm(e) {
+		if (e.currentTarget.classList.contains('edit')) {
+			this.setState({
+				editId: e.currentTarget.parentNode.parentNode.id,
+				editSchool: true,
+				addSchool: true,
+			});
+		} else {
+			this.setState({
+				addSchool: !this.state.addSchool,
+				editSchool: false,
+			});
+		}
+	}
+
+	handleClickRemoveSchool(e) {
+		const id = e.currentTarget.parentNode.parentNode.id;
+
 		this.setState({
-			showForm: !this.state.showForm,
-			editMode: false,
+			schools: this.state.schools.filter((school) => school.id != id),
 		});
 	}
 
-	handleAdd(e) {
+	handleSubmitAdd(e) {
 		e.preventDefault();
 
 		const formData = new FormData(e.target);
@@ -44,28 +60,12 @@ class Education extends Component {
 		this.setState({
 			schools: this.state.schools.concat(newSchool),
 			count: this.state.count + 1,
-			showForm: false,
-			editMode: false,
+			addSchool: false,
+			editSchool: false,
 		});
 	}
 
-	handleRemove(e) {
-		const id = e.currentTarget.parentNode.parentNode.id;
-
-		this.setState({
-			schools: this.state.schools.filter((school) => school.id != id),
-		});
-	}
-
-	toggleEdit(e) {
-		this.setState({
-			editMode: true,
-			editId: e.currentTarget.parentNode.parentNode.id,
-			showForm: true,
-		});
-	}
-
-	handleEdit(e) {
+	handleSubmitEdit(e) {
 		e.preventDefault();
 
 		const formData = new FormData(e.target);
@@ -83,21 +83,24 @@ class Education extends Component {
 
 		this.setState({
 			schools: schools,
-			showForm: false,
-			editMode: false,
+			addSchool: false,
+			editSchool: false,
 		});
 	}
 
 	render() {
-		const { schools, showForm, editMode, editId } = this.state;
+		const { schools, addSchool, editSchool, editId } = this.state;
 
 		return (
 			<div className="Education">
 				<div className="header">
 					<h1>Education</h1>
-					<Button text="Add" onClick={this.toggleForm} className="add" />
+					<Button
+						text="Add"
+						onClick={this.handleClickToggleForm}
+						className="add"
+					/>
 				</div>
-
 				{schools.map((school, i) => {
 					return (
 						<School
@@ -106,25 +109,19 @@ class Education extends Component {
 							start={school.start}
 							end={school.end}
 							description={school.description}
-							handleRemove={this.handleRemove}
-							toggleEdit={this.toggleEdit}
 							id={school.id}
 							key={i}
+							onClickRemove={this.handleClickRemoveSchool}
+							onClickEdit={this.handleClickToggleForm}
 						/>
 					);
 				})}
 
-				{showForm && (
+				{addSchool && (
 					<Form
 						fields={
-							editMode
-								? {
-										name: schools[editId].name,
-										degree: schools[editId].degree,
-										start: schools[editId].start,
-										end: schools[editId].end,
-										description: schools[editId].description,
-								  }
+							editSchool
+								? schools.find((school) => school.id == editId)
 								: {
 										name: '',
 										degree: '',
@@ -133,8 +130,8 @@ class Education extends Component {
 										description: '',
 								  }
 						}
-						handleSubmit={editMode ? this.handleEdit : this.handleAdd}
-						toggleForm={this.toggleForm}
+						onSubmit={editSchool ? this.handleSubmitEdit : this.handleSubmitAdd}
+						onClickCancel={this.handleClickToggleForm}
 					/>
 				)}
 			</div>

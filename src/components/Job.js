@@ -9,9 +9,9 @@ class Job extends Component {
 			start,
 			end,
 			description,
-			handleRemove,
-			toggleEdit,
 			id,
+			onClickRemove,
+			onClickEdit,
 		} = this.props;
 
 		return (
@@ -23,8 +23,12 @@ class Job extends Component {
 				</p>
 				<p className="description">{description}</p>
 				<div className="buttons">
-					<Button text="Edit" className="edit job" onClick={toggleEdit} />
-					<Button text="Delete" className="delete job" onClick={handleRemove} />
+					<Button text="Edit" className="edit job" onClick={onClickEdit} />
+					<Button
+						text="Delete"
+						className="delete job"
+						onClick={onClickRemove}
+					/>
 				</div>
 			</div>
 		);

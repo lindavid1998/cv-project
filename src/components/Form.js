@@ -4,11 +4,12 @@ import '../styles/Form.css';
 
 class Form extends Component {
 	render() {
-		const { fields, handleSubmit, toggleForm } = this.props;
+		const { fields, onSubmit, onClickCancel } = this.props;
 
 		return (
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={onSubmit}>
 				{Object.keys(fields).map((key, i) => {
+					if (key == 'id') return null
 					return (
 						<div className="form-row" key={i}>
 							<label htmlFor={key}>
@@ -25,7 +26,7 @@ class Form extends Component {
 				})}
 				<div className="form-row">
 					<input type="submit" value="Submit"></input>
-					<Button text="Cancel" onClick={toggleForm} className="cancel" />
+					<Button text="Cancel" onClick={onClickCancel} className="cancel" />
 				</div>
 			</form>
 		);

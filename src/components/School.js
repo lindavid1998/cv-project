@@ -10,9 +10,9 @@ class School extends Component {
 			start,
 			end,
 			description,
-			handleRemove,
-			toggleEdit,
 			id,
+			onClickRemove,
+			onClickEdit,
 		} = this.props;
 		
 		return (
@@ -24,11 +24,11 @@ class School extends Component {
 				</p>
 				<p className="description">{description}</p>
 				<div className="buttons">
-					<Button text="Edit" className="edit school" onClick={toggleEdit} />
+					<Button text="Edit" className="edit school" onClick={onClickEdit} />
 					<Button
 						text="Delete"
 						className="delete school"
-						onClick={handleRemove}
+						onClick={onClickRemove}
 					/>
 				</div>
 			</div>

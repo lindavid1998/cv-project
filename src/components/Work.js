@@ -9,25 +9,41 @@ class Work extends Component {
 		this.state = {
 			jobs: [],
 			count: 0,
-			showForm: false,
-			editMode: false,
+			addWork: false,
+			editJob: false,
 			editId: null,
 		};
-		this.toggleForm = this.toggleForm.bind(this);
-		this.toggleEdit = this.toggleEdit.bind(this);
-		this.handleAdd = this.handleAdd.bind(this);
-		this.handleRemove = this.handleRemove.bind(this);
-		this.handleEdit = this.handleEdit.bind(this);
+
+		this.handleClickToggleForm = this.handleClickToggleForm.bind(this);
+		this.handleClickRemove = this.handleClickRemove.bind(this);
+		this.handleSubmitAdd = this.handleSubmitAdd.bind(this);
+		this.handleSubmitEdit = this.handleSubmitEdit.bind(this);
 	}
 
-	toggleForm() {
+	handleClickToggleForm(e) {
+		if (e.currentTarget.classList.contains('edit')) {
+			this.setState({
+				addWork: true,
+				editJob: true,
+				editId: e.currentTarget.parentNode.parentNode.id,
+			});
+		} else {
+			this.setState({
+				addWork: !this.state.addWork,
+				editJob: false,
+			});
+		}
+	}
+
+	handleClickRemove(e) {
+		const id = e.currentTarget.parentNode.parentNode.id;
+
 		this.setState({
-			showForm: !this.state.showForm,
-			editMode: false,
+			jobs: this.state.jobs.filter((job) => job.id != id),
 		});
 	}
 
-	handleAdd(e) {
+	handleSubmitAdd(e) {
 		e.preventDefault();
 
 		const formData = new FormData(e.target);
@@ -43,28 +59,12 @@ class Work extends Component {
 		this.setState({
 			jobs: this.state.jobs.concat(newJob),
 			count: this.state.count + 1,
-			showForm: false,
-			editMode: false,
+			addWork: false,
+			editJob: false,
 		});
 	}
 
-	handleRemove(e) {
-		const id = e.currentTarget.parentNode.parentNode.id;
-
-		this.setState({
-			jobs: this.state.jobs.filter((job) => job.id != id),
-		});
-	}
-
-	toggleEdit(e) {
-		this.setState({
-			editMode: true,
-			editId: e.currentTarget.parentNode.parentNode.id,
-			showForm: true,
-		});
-	}
-
-	handleEdit(e) {
+	handleSubmitEdit(e) {
 		e.preventDefault();
 
 		const formData = new FormData(e.target);
@@ -77,24 +77,28 @@ class Work extends Component {
 		};
 
 		let jobs = this.state.jobs;
-		let i = jobs.findIndex((school) => school.id == this.state.editId);        
-        jobs[i] = Object.assign({}, jobs[i], newJob)
+		let i = jobs.findIndex((school) => school.id == this.state.editId);
+		jobs[i] = Object.assign({}, jobs[i], newJob);
 
 		this.setState({
 			jobs: jobs,
-			showForm: false,
-			editMode: false,
+			addWork: false,
+			editJob: false,
 		});
 	}
 
 	render() {
-		const { jobs, showForm, editMode, editId } = this.state;
+		const { jobs, addWork, editJob, editId } = this.state;
 
 		return (
 			<div className="Work">
 				<div className="header">
 					<h1>Work</h1>
-					<Button text="Add" onClick={this.toggleForm} className="add" />
+					<Button
+						text="Add"
+						onClick={this.handleClickToggleForm}
+						className="add"
+					/>
 				</div>
 				{jobs.map((job, i) => {
 					return (
@@ -104,25 +108,19 @@ class Work extends Component {
 							start={job.start}
 							end={job.end}
 							description={job.description}
-							handleRemove={this.handleRemove}
-							toggleEdit={this.toggleEdit}
 							id={job.id}
 							key={i}
+							onClickRemove={this.handleClickRemove}
+							onClickEdit={this.handleClickToggleForm}
 						/>
 					);
 				})}
 
-				{showForm && (
+				{addWork && (
 					<Form
 						fields={
-							editMode
-								? {
-										company: jobs[editId].company,
-										title: jobs[editId].title,
-										start: jobs[editId].start,
-										end: jobs[editId].end,
-										description: jobs[editId].description,
-								  }
+							editJob
+								? jobs.find((job) => job.id == editId)
 								: {
 										company: '',
 										title: '',
@@ -131,8 +129,8 @@ class Work extends Component {
 										description: '',
 								  }
 						}
-						handleSubmit={editMode ? this.handleEdit : this.handleAdd}
-						toggleForm={this.toggleForm}
+						onSubmit={editJob ? this.handleSubmitEdit : this.handleSubmitAdd}
+						onClickCancel={this.handleClickToggleForm}
 					/>
 				)}
 			</div>
