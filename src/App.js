@@ -10,10 +10,20 @@ function App() {
 		<div className="App">
 			<Overview></Overview>
 			<Section
-				title="Test"
+				title="Test-Education"
 				formFields={{
 					name: '',
 					degree: '',
+					start: '',
+					end: '',
+					description: '',
+				}}
+			/>
+			<Section
+				title="Test-Work"
+				formFields={{
+					company: '',
+					title: '',
 					start: '',
 					end: '',
 					description: '',
