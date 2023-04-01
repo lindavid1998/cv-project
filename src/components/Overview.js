@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import '../styles/Overview.css';
 import Button from './Button';
 import Form from './Form';
-import avatar from './avatar.svg';
-import ImageForm from './ImageForm';
+import Avatar from './Avatar';
 
 class Overview extends Component {
 	constructor(props) {
@@ -20,21 +19,12 @@ class Overview extends Component {
 		};
 
 		this.handleClickToggleEditInfo = this.handleClickToggleEditInfo.bind(this);
-		this.handleClickToggleEditAvatar =
-			this.handleClickToggleEditAvatar.bind(this);
 		this.handleSubmitInfo = this.handleSubmitInfo.bind(this);
-		this.handleSubmitAvatar = this.handleSubmitAvatar.bind(this);
 	}
 
 	handleClickToggleEditInfo() {
 		this.setState({
 			editInfo: !this.state.editInfo,
-		});
-	}
-
-	handleClickToggleEditAvatar() {
-		this.setState({
-			editAvatar: !this.state.editAvatar,
 		});
 	}
 
@@ -53,24 +43,13 @@ class Overview extends Component {
 		});
 	}
 
-	handleSubmitAvatar(e) {
-		e.preventDefault();
-		const formData = new FormData(e.target);
-		console.log(formData);
-		this.setState({
-			editAvatar: false,
-		});
-	}
-
 	render() {
 		const { info, editInfo, editAvatar } = this.state;
 		const { name, title, phone, email } = info;
 
 		return (
 			<div className="Overview">
-				<div className="avatar" onClick={this.handleClickToggleEditAvatar}>
-					<img src={avatar} alt="Avatar" />
-				</div>
+				<Avatar />
 				<h1 className="name">{name}</h1>
 				<h2 className="title">{title}</h2>
 				<div className="contact-info">
@@ -93,12 +72,6 @@ class Overview extends Component {
 					/>
 				)}
 
-				{editAvatar && (
-					<ImageForm
-						onSubmit={this.handleSubmitAvatar}
-						onClickCancel={this.handleClickToggleEditAvatar}
-					/>
-				)}
 			</div>
 		);
 	}
