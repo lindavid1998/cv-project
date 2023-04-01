@@ -39,7 +39,7 @@ class Section extends Component {
 	};
 
 	render() {
-		const { add } = this.state;
+		const { add, data } = this.state;
 		const { title, formFields } = this.props;
 
 		return (
