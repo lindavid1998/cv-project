@@ -7,7 +7,7 @@ input[type='submit'] {
 	justify-content: center;
 	align-items: center;
 	background-color: var(--second-background-color);
-  border-radius: 4px;
+	border-radius: 4px;
 	border: 0;
 	box-sizing: border-box;
 	color: #fff;

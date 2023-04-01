@@ -1,0 +1,15 @@
+.Section {
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.Section:hover button.add {
+	visibility: visible;
+}
