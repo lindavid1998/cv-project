@@ -1,6 +1,4 @@
 import Overview from './components/Overview';
-import Education from './components/Education';
-import Work from './components/Work';
 import Skills from './components/Skills';
 import Section from './components/Section';
 import './styles/App.css';
@@ -10,7 +8,7 @@ function App() {
 		<div className="App">
 			<Overview></Overview>
 			<Section
-				title="Test-Education"
+				title="Education"
 				formFields={{
 					name: '',
 					degree: '',
@@ -20,7 +18,7 @@ function App() {
 				}}
 			/>
 			<Section
-				title="Test-Work"
+				title="Work"
 				formFields={{
 					company: '',
 					title: '',
@@ -29,8 +27,6 @@ function App() {
 					description: '',
 				}}
 			/>
-			<Education></Education>
-			<Work></Work>
 			<Skills></Skills>
 		</div>
 	);

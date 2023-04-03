@@ -1,29 +1,52 @@
 import React, { Component } from 'react';
 import Form from './Form';
 import Button from './Button';
+import Subsection from './Subsection';
 import '../styles/Section.css';
 class Section extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			add: false,
-            data: [],
-            count: 0,
+			showForm: false,
+			data: [],
+			count: 0,
+			edit: false,
+			editID: null,
 		};
-		this.handleClick = this.handleClick.bind(this);
+		this.handleClickShowForm = this.handleClickShowForm.bind(this);
+		this.handleClickDelete = this.handleClickDelete.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	handleClick = (value) => {
+	handleClickShowForm = (value) => {
 		this.setState({
-			add: value,
+			showForm: value,
+		});
+	};
+
+	handleClickDelete = (e) => {
+		const id = e.currentTarget.parentNode.parentNode.id;
+
+		this.setState({
+			data: this.state.data.filter((info) => info.id != id),
+		});
+	};
+
+	handleClickEdit = (e) => {
+		const id = e.currentTarget.parentNode.parentNode.id;
+
+		this.setState({
+			showForm: true,
+			edit: true,
+			editID: id,
 		});
 	};
 
 	handleSubmit = (e) => {
 		e.preventDefault();
 
-		const formData = new FormData(e.target);
+        const formData = new FormData(e.target);
+        
 		const keys = Object.keys(this.props.formFields);
 
 		const newData = keys.reduce((acc, key) => {
@@ -31,15 +54,25 @@ class Section extends Component {
 			return acc;
         }, {});
         
+		newData['id'] = this.state.count;
+
+		let data;
+		if (this.state.edit) {
+			data = this.state.data;
+			let i = data.findIndex((info) => info.id == this.state.editID);
+			data[i] = Object.assign({}, data[i], newData);
+		}
+
 		this.setState({
-			data: this.state.data.concat(newData),
-			add: false,
+			data: this.state.edit ? data : this.state.data.concat(newData),
+			showForm: false,
+			edit: false,
 			count: this.state.count + 1,
 		});
 	};
 
 	render() {
-		const { add, data } = this.state;
+		const { showForm, data, edit, editID } = this.state;
 		const { title, formFields } = this.props;
 
 		return (
@@ -48,15 +81,24 @@ class Section extends Component {
 					<h1>{title}</h1>
 					<Button
 						text="Add"
-						onClick={() => this.handleClick(true)}
+						onClick={() => this.handleClickShowForm(true)}
 						className="add"
 					/>
 				</div>
-
-				{add && (
+				{data.map((info, i) => {
+					return (
+						<Subsection
+							info={info}
+							onClickDelete={this.handleClickDelete}
+							onClickEdit={this.handleClickEdit}
+							key={i}
+						/>
+					);
+				})}
+				{showForm && (
 					<Form
-						fields={formFields}
-						onClickCancel={() => this.handleClick(false)}
+						fields={edit ? data.find((info) => info.id == editID) : formFields}
+						onClickCancel={() => this.handleClickShowForm(false)}
 						onSubmit={this.handleSubmit}
 					/>
 				)}
