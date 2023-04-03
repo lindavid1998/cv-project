@@ -13,7 +13,7 @@ class Subsection extends Component {
 				<p className="duration">
 					{info.start} - {info.end}
 				</p>
-				<p className="description">{info.description}</p>
+				{info.description && <p className="description">{info.description}</p>}
 				<div className="buttons">
 					<Button text="Edit" className="edit" onClick={onClickEdit} />
 					<Button text="Delete" className="delete" onClick={onClickDelete} />
