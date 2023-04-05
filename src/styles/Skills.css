@@ -1,3 +1,9 @@
+.Skills {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
 .skills-list {
 	list-style: disc outside;
 	display: grid;
@@ -26,5 +32,9 @@
 }
 
 .skill:hover button {
+	visibility: visible;
+}
+
+.Skills:hover button.add {
 	visibility: visible;
 }

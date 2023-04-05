@@ -8,23 +8,18 @@ class Avatar extends Component {
 		super(props);
 		this.state = {
 			src: avatar,
-			editAvatar: false,
+			isFormVisible: false,
 		};
-		this.handleClickHideForm = this.handleClickHideForm.bind(this);
-		this.handleClickShowForm = this.handleClickShowForm.bind(this);
+
+		this.showForm = this.showForm.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	handleClickHideForm() {
+	showForm(e, value) {
+		e.stopPropagation();
 		this.setState({
-			editAvatar: false,
-		});
-	}
-
-	handleClickShowForm() {
-		this.setState({
-			editAvatar: true,
-		});
+			isFormVisible: value,
+		})
 	}
 
 	handleSubmit(e) {
@@ -32,6 +27,8 @@ class Avatar extends Component {
 
 		// retrieve submitted file
 		const file = e.target.querySelector('#avatar-img').files[0];
+
+		if (!file) return null
 
 		// create instance of FileReader object
 		const reader = new FileReader();
@@ -42,24 +39,25 @@ class Avatar extends Component {
 		// update state after file is read as URL
 		reader.onload = (event) => {
 			const imageData = event.target.result;
-			
+
 			this.setState({
 				src: imageData,
-				editAvatar: false,
+				isFormVisible: false,
 			});
 		};
 	}
 
 	render() {
-		const { src, editAvatar } = this.state;
+		const { src, isFormVisible } = this.state;
 
 		return (
-			<div className="avatar" onClick={this.handleClickShowForm}>
+			<div className="avatar" onClick={(e) => this.showForm(e, true)}>
 				<img src={src} alt="Avatar" />
-				{editAvatar && (
+
+				{isFormVisible && (
 					<ImageForm
 						onSubmit={this.handleSubmit}
-						onClickCancel={this.handleClickHideForm}
+						onClickCancel={(e) => this.showForm(e, false)}
 					/>
 				)}
 			</div>

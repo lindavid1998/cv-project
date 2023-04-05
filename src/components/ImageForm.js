@@ -3,12 +3,11 @@ import Button from './Button';
 
 class ImageForm extends Component {
 	render() {
-		const { onSubmit, onClickCancel } = this.props;
+		const { onClickCancel, onSubmit } = this.props;
 
 		return (
 			<form onSubmit={onSubmit}>
 				<div className="form-row">
-					{/* <label for="avatar-img">Select an image:</label> */}
 					<input
 						type="file"
 						id="avatar-img"

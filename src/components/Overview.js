@@ -14,22 +14,22 @@ class Overview extends Component {
 				phone: 'xxx-xxx-xxxx',
 				email: 'xxx@email.com',
 			},
-			editInfo: false,
-			editAvatar: false,
+			isFormVisible: false,
 		};
 
-		this.handleClickToggleEditInfo = this.handleClickToggleEditInfo.bind(this);
-		this.handleSubmitInfo = this.handleSubmitInfo.bind(this);
+		this.toggleForm = this.toggleForm.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	handleClickToggleEditInfo() {
+	toggleForm() {
 		this.setState({
-			editInfo: !this.state.editInfo,
+			isFormVisible: !this.state.isFormVisible,
 		});
 	}
 
-	handleSubmitInfo(e) {
+	handleSubmit(e) {
 		e.preventDefault();
+
 		const formData = new FormData(e.target);
 
 		this.setState({
@@ -39,12 +39,12 @@ class Overview extends Component {
 				phone: formData.get('phone'),
 				email: formData.get('email'),
 			},
-			editInfo: false,
+			isFormVisible: false,
 		});
 	}
 
 	render() {
-		const { info, editInfo } = this.state;
+		const { info, isFormVisible } = this.state;
 		const { name, title, phone, email } = info;
 
 		return (
@@ -58,20 +58,15 @@ class Overview extends Component {
 					<div>{email}</div>
 				</div>
 
-				<Button
-					text="Edit"
-					onClick={this.handleClickToggleEditInfo}
-					className="edit"
-				/>
+				<Button text="Edit" onClick={this.toggleForm} className="edit" />
 
-				{editInfo && (
+				{isFormVisible && (
 					<Form
 						fields={info}
-						onSubmit={this.handleSubmitInfo}
-						onClickCancel={this.handleClickToggleEditInfo}
+						onSubmit={this.handleSubmit}
+						onClickCancel={this.toggleForm}
 					/>
 				)}
-
 			</div>
 		);
 	}

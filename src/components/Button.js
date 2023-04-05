@@ -24,7 +24,7 @@ class Button extends Component {
 		}
 
 		return (
-			<button onClick={onClick} id={id} className={className}>
+			<button onClick={onClick} id={id} className={className} type="button">
 				{icon}
 			</button>
 		);

@@ -8,21 +8,29 @@ class Skills extends Component {
 		super(props);
 		this.state = {
 			skills: [],
-			editSkills: false,
+			isEditMode: false,
 			count: 0,
 		};
-		this.handleClickToggleForm = this.handleClickToggleForm.bind(this);
-		this.handleSubmitAdd = this.handleSubmitAdd.bind(this);
-		this.handleClickRemove = this.handleClickRemove.bind(this);
+		this.toggleForm = this.toggleForm.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleDelete = this.handleDelete.bind(this);
 	}
 
-	handleClickToggleForm() {
+	toggleForm() {
 		this.setState({
-			editSkills: !this.state.editSkills,
+			isEditMode: !this.state.isEditMode,
 		});
 	}
 
-	handleSubmitAdd(e) {
+	handleDelete(e) {
+		const id = e.currentTarget.parentNode.parentNode.id;
+
+		this.setState({
+			skills: this.state.skills.filter((skill) => skill.id != id),
+		});
+	}
+
+	handleSubmit(e) {
 		e.preventDefault();
 
 		const formData = new FormData(e.target);
@@ -33,31 +41,19 @@ class Skills extends Component {
 
 		this.setState({
 			skills: this.state.skills.concat(newSkill),
-			editSkills: false,
+			isEditMode: false,
 			count: this.state.count + 1,
 		});
 	}
 
-	handleClickRemove(e) {
-		const id = e.currentTarget.parentNode.parentNode.id;
-
-		this.setState({
-			skills: this.state.skills.filter((skill) => skill.id != id),
-		});
-	}
-
 	render() {
-		const { editSkills, skills } = this.state;
-		
+		const { isEditMode, skills } = this.state;
+
 		return (
 			<div className="Skills">
 				<div className="header">
 					<h1>Skills</h1>
-					<Button
-						text="Add"
-						onClick={this.handleClickToggleForm}
-						className="add"
-					/>
+					<Button text="Add" className="add" onClick={this.toggleForm} />
 				</div>
 
 				<ul className="skills-list">
@@ -67,9 +63,9 @@ class Skills extends Component {
 								<div>
 									<p>{skill.name}</p>
 									<Button
-										onClick={this.handleClickRemove}
-										className="delete"
 										text="Delete"
+										className="delete"
+										onClick={this.handleDelete}
 									/>
 								</div>
 							</li>
@@ -77,13 +73,13 @@ class Skills extends Component {
 					})}
 				</ul>
 
-				{editSkills && (
+				{isEditMode && (
 					<Form
 						fields={{
 							skill: '',
 						}}
-						onSubmit={this.handleSubmitAdd}
-						onClickCancel={this.handleClickToggleForm}
+						onSubmit={this.handleSubmit}
+						onClickCancel={this.toggleForm}
 					/>
 				)}
 			</div>
