@@ -9,14 +9,14 @@ class Form extends Component {
 		return (
 			<form onSubmit={onSubmit}>
 				{Object.keys(fields).map((key, i) => {
-					if (key === 'id') return null
+					if (key === 'id') return null;
 					return (
-						<div className="form-row" key={i}>
+						<div className='form-row' key={i}>
 							<label htmlFor={key}>
 								{key.charAt(0).toUpperCase() + key.slice(1)}
 							</label>
 							<input
-								type="text"
+								type='text'
 								id={key}
 								name={key}
 								defaultValue={fields[key]}
@@ -24,9 +24,9 @@ class Form extends Component {
 						</div>
 					);
 				})}
-				<div className="form-row">
-					<input type="submit" value="Submit"></input>
-					<Button text="Cancel" onClick={onClickCancel} className="cancel" />
+				<div className='form-row'>
+					<input type='submit' value='Submit'></input>
+					<Button text='Cancel' onClick={onClickCancel} className='cancel' />
 				</div>
 			</form>
 		);

@@ -8,13 +8,13 @@ class Button extends Component {
 		let icon;
 		switch (text) {
 			case 'Add':
-				icon = <i className="fa-solid fa-circle-plus"></i>;
+				icon = <i className='fa-solid fa-circle-plus'></i>;
 				break;
 			case 'Edit':
-				icon = <i className="fa-solid fa-pen"></i>;
+				icon = <i className='fa-solid fa-pen'></i>;
 				break;
 			case 'Delete':
-				icon = <i className="fa-regular fa-trash-can"></i>;
+				icon = <i className='fa-regular fa-trash-can'></i>;
 				break;
 			case 'Cancel':
 				icon = text;
@@ -24,7 +24,7 @@ class Button extends Component {
 		}
 
 		return (
-			<button onClick={onClick} id={id} className={className} type="button">
+			<button onClick={onClick} id={id} className={className} type='button'>
 				{icon}
 			</button>
 		);

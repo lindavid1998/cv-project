@@ -7,8 +7,8 @@ class Section extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isFormVisible: false,
 			data: [],
+			isFormVisible: false,
 			count: 0,
 			editID: null,
 		};
@@ -32,16 +32,13 @@ class Section extends Component {
 
 	handleDelete(e) {
 		const id = e.currentTarget.parentNode.parentNode.id;
-
 		this.setState({
 			data: this.state.data.filter((info) => info.id != id),
 		});
 	}
 
 	handleEdit(e) {
-		console.log('edit')
 		const id = e.currentTarget.parentNode.parentNode.id;
-
 		this.setState({
 			isFormVisible: true,
 			editID: id,
@@ -72,6 +69,7 @@ class Section extends Component {
 		this.setState({
 			data: this.state.editID ? data : this.state.data.concat(newData),
 			isFormVisible: false,
+			editID: null,
 			count: this.state.count + 1,
 		});
 	}
@@ -99,17 +97,17 @@ class Section extends Component {
 
 		return (
 			<div className={`Section ${title}`}>
-				<div className="header">
+				<div className='header'>
 					<h1>{title}</h1>
 					<Button
-						text="Add"
-						className="add"
+						text='Add'
+						className='add'
 						onClick={() => this.showForm(true)}
 					/>
 				</div>
 
 				{title === 'Skills' ? (
-					<ul className="skills-list">{subsections}</ul>
+					<ul className='skills-list'>{subsections}</ul>
 				) : (
 					subsections
 				)}

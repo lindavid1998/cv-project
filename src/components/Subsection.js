@@ -11,12 +11,8 @@ class Subsection extends Component {
 				<li className="skill" key={info.id} id={info.id}>
 					<div>
 						<p className="skill-name">{info.skill}</p>
-						<Button text="Edit" className="edit" onClick={this.onClickEdit} />
-						<Button
-							text="Delete"
-							className="delete"
-							onClick={this.onClickDelete}
-						/>
+						<Button text="Edit" className="edit" onClick={onClickEdit} />
+						<Button text="Delete" className="delete" onClick={onClickDelete} />
 					</div>
 				</li>
 			);

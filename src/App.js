@@ -4,11 +4,11 @@ import './styles/App.css';
 
 function App() {
 	return (
-		<div className="App">
+		<div className='App'>
 			<Overview />
 
 			<Section
-				title="Education"
+				title='Education'
 				formFields={{
 					name: '',
 					degree: '',
@@ -19,7 +19,7 @@ function App() {
 			/>
 
 			<Section
-				title="Work"
+				title='Work'
 				formFields={{
 					company: '',
 					title: '',
@@ -30,7 +30,7 @@ function App() {
 			/>
 
 			<Section
-				title="Skills"
+				title='Skills'
 				formFields={{
 					skill: '',
 				}}

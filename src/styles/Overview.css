@@ -50,8 +50,8 @@
 	z-index: 999;
 	opacity: 0;
 	transition: opacity 0.3s ease;
-    font-weight: 700;
-    transform: translate(-50%, -50%);
+	font-weight: 700;
+	transform: translate(-50%, -50%);
 }
 
 .avatar:hover::before {

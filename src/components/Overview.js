@@ -48,17 +48,17 @@ class Overview extends Component {
 		const { name, title, phone, email } = info;
 
 		return (
-			<div className="Overview">
+			<div className='Overview'>
 				<Avatar />
-				<h1 className="name">{name}</h1>
-				<h2 className="title">{title}</h2>
-				<div className="contact-info">
+				<h1 className='name'>{name}</h1>
+				<h2 className='title'>{title}</h2>
+				<div className='contact-info'>
 					<div>{phone}</div>
 					<div>|</div>
 					<div>{email}</div>
 				</div>
 
-				<Button text="Edit" onClick={this.toggleForm} className="edit" />
+				<Button text='Edit' onClick={this.toggleForm} className='edit' />
 
 				{isFormVisible && (
 					<Form

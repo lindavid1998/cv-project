@@ -1,12 +1,12 @@
 .App {
-    margin: 0 auto;
-    width: 80%;
-    max-width: 700px;
-    height: 100vh;
-    padding: 70px;
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
-    background-color: var(--second-background-color);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	margin: 0 auto;
+	width: 80%;
+	max-width: 700px;
+	height: 100vh;
+	padding: 70px;
+	display: flex;
+	flex-direction: column;
+	gap: 50px;
+	background-color: var(--second-background-color);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }

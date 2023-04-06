@@ -19,7 +19,7 @@ class Avatar extends Component {
 		e.stopPropagation();
 		this.setState({
 			isFormVisible: value,
-		})
+		});
 	}
 
 	handleSubmit(e) {
@@ -28,7 +28,7 @@ class Avatar extends Component {
 		// retrieve submitted file
 		const file = e.target.querySelector('#avatar-img').files[0];
 
-		if (!file) return null
+		if (!file) return null;
 
 		// create instance of FileReader object
 		const reader = new FileReader();
@@ -51,8 +51,8 @@ class Avatar extends Component {
 		const { src, isFormVisible } = this.state;
 
 		return (
-			<div className="avatar" onClick={(e) => this.showForm(e, true)}>
-				<img src={src} alt="Avatar" />
+			<div className='avatar' onClick={(e) => this.showForm(e, true)}>
+				<img src={src} alt='Avatar' />
 
 				{isFormVisible && (
 					<ImageForm
