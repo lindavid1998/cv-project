@@ -1,12 +1,12 @@
 import Overview from './components/Overview';
-import Skills from './components/Skills';
 import Section from './components/Section';
 import './styles/App.css';
 
 function App() {
 	return (
 		<div className="App">
-			<Overview></Overview>
+			<Overview />
+
 			<Section
 				title="Education"
 				formFields={{
@@ -17,6 +17,7 @@ function App() {
 					description: '',
 				}}
 			/>
+
 			<Section
 				title="Work"
 				formFields={{
@@ -27,7 +28,13 @@ function App() {
 					description: '',
 				}}
 			/>
-			<Skills></Skills>
+
+			<Section
+				title="Skills"
+				formFields={{
+					skill: '',
+				}}
+			></Section>
 		</div>
 	);
 }

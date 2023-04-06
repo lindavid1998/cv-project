@@ -6,6 +6,22 @@ class Subsection extends Component {
 	render() {
 		const { info, onClickDelete, onClickEdit } = this.props;
 
+		if (info.skill) {
+			return (
+				<li className="skill" key={info.id} id={info.id}>
+					<div>
+						<p className="skill-name">{info.skill}</p>
+						<Button text="Edit" className="edit" onClick={this.onClickEdit} />
+						<Button
+							text="Delete"
+							className="delete"
+							onClick={this.onClickDelete}
+						/>
+					</div>
+				</li>
+			);
+		}
+
 		return (
 			<div className="Subsection" id={info.id}>
 				<h2 className="header">{info.name || info.company}</h2>

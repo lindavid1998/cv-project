@@ -21,3 +21,32 @@
 	top: 0;
 	right: 0;
 }
+
+.Skills {
+	gap: 20px;
+}
+
+.skills-list {
+	list-style: disc outside;
+	display: grid;
+	grid-template-columns: repeat(2, minmax(80px, 1fr));
+	column-gap: 70px;
+	row-gap: 12px;
+	width: 85%;
+	margin: 0 auto;
+}
+
+.skill div {
+	display: flex;
+	width: 100%;
+	justify-content: flex-end;
+    align-items: center;
+}
+
+.skill-name {
+	flex-grow: 1;
+}
+
+.skill:hover button {
+	visibility: visible;
+}

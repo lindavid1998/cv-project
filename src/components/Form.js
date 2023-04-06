@@ -9,7 +9,7 @@ class Form extends Component {
 		return (
 			<form onSubmit={onSubmit}>
 				{Object.keys(fields).map((key, i) => {
-					if (key == 'id') return null
+					if (key === 'id') return null
 					return (
 						<div className="form-row" key={i}>
 							<label htmlFor={key}>
