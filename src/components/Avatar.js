@@ -1,33 +1,22 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import avatar from './avatar.svg';
 import ImageForm from './ImageForm';
 import '../styles/Avatar.css';
 
-class Avatar extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			src: avatar,
-			isFormVisible: false,
-		};
+function Avatar() {
+	const [src, setSrc] = useState(avatar);
+	const [isFormVisible, setIsFormVisible] = useState(false);
 
-		this.showForm = this.showForm.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-	}
-
-	showForm(e, value) {
+	const showForm = (e, value) => {
 		e.stopPropagation();
-		this.setState({
-			isFormVisible: value,
-		});
+		setIsFormVisible(value);
 	}
 
-	handleSubmit(e) {
+	const handleSubmit = (e) => {
 		e.preventDefault();
 
 		// retrieve submitted file
 		const file = e.target.querySelector('#avatar-img').files[0];
-
 		if (!file) return null;
 
 		// create instance of FileReader object
@@ -39,30 +28,23 @@ class Avatar extends Component {
 		// update state after file is read as URL
 		reader.onload = (event) => {
 			const imageData = event.target.result;
-
-			this.setState({
-				src: imageData,
-				isFormVisible: false,
-			});
+			setSrc(imageData);
+			setIsFormVisible(false);
 		};
 	}
 
-	render() {
-		const { src, isFormVisible } = this.state;
+	return (
+		<div className='avatar' onClick={(e) => showForm(e, true)}>
+			<img src={src} alt='Avatar' />
 
-		return (
-			<div className='avatar' onClick={(e) => this.showForm(e, true)}>
-				<img src={src} alt='Avatar' />
-
-				{isFormVisible && (
-					<ImageForm
-						onSubmit={this.handleSubmit}
-						onClickCancel={(e) => this.showForm(e, false)}
-					/>
-				)}
-			</div>
-		);
-	}
+			{isFormVisible && (
+				<ImageForm
+					onSubmit={handleSubmit}
+					onClickCancel={(e) => showForm(e, false)}
+				/>
+			)}
+		</div>
+	);
 }
 
 export default Avatar;
